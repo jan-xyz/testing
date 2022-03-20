@@ -495,30 +495,29 @@ func TestNil(t *testing.T) {
 func TestNotNil(t *testing.T) {
 	mockT := new(testing.T)
 
-	type testCase[T comparable] struct {
-		f      func() error
+	type testCase struct {
+		actual any
 		result bool
 		remark string
 	}
 
-	cases := []testCase[*struct{ field int }]{
+	cases := []testCase{
 		{
-			f:      func() error { return errors.New("some error") },
+			actual: errors.New("some error"),
 			result: true,
 		},
 		{
-			f:      func() error { return nil },
+			actual: nil,
 			result: false,
 		},
 	}
 
 	for _, c := range cases {
-		t.Run(fmt.Sprintf("Equal(%#v, %#v)", nil, c.f()), func(t *testing.T) {
-			err := c.f()
-			res := assert.NotNil(mockT, err)
+		t.Run(fmt.Sprintf("Equal(%#v, %#v)", nil, c.actual), func(t *testing.T) {
+			res := assert.NotNil(mockT, c.actual)
 
 			if res != c.result {
-				t.Errorf("Equal(%#v, %#v) should return %#v: %s", nil, err, c.result, c.remark)
+				t.Errorf("Equal(%#v, %#v) should return %#v: %s", nil, c.actual, c.result, c.remark)
 			}
 		})
 	}
