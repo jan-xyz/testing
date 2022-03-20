@@ -50,8 +50,32 @@ func Fail(t *testing.T, failureMessage string, msgArgs ...any) bool {
 //
 //    assert.Same(t, ptr1, ptr2)
 //
-// Both arguments must be pointer variables. Pointer variable sameness is
-// determined based on the equality of both type and value.
-func Same(t testing.T, expected, actual interface{}, msgAndArgs ...interface{}) bool {
+// This is similar to [Equal], however, Pointer variable sameness is
+// determined based on the same memory addresses.
+func Same(t *testing.T, expected, actual interface{}, msgAndArgs ...interface{}) bool {
+	if expected != actual {
+		return Fail(t, fmt.Sprintf("Not equal: \n"+
+			"expected: %v\n"+
+			//TODO: support diff
+			//"actual  : %s%s", expected, actual, diff), msgAndArgs...)
+			"actual  : %v", expected, actual), msgAndArgs...)
+	}
+	return true
+}
+
+// NotSame asserts that two pointers do not reference the same object.
+//
+//    assert.NotSame(t, ptr1, ptr2)
+//
+// This is similar to [NotEqual], however, Pointer variable sameness is
+// determined based on the same memory addresses.
+func NotSame(t *testing.T, expected, actual interface{}, msgAndArgs ...interface{}) bool {
+	if expected == actual {
+		return Fail(t, fmt.Sprintf("Not equal: \n"+
+			"expected: %v\n"+
+			//TODO: support diff
+			//"actual  : %s%s", expected, actual, diff), msgAndArgs...)
+			"actual  : %v", expected, actual), msgAndArgs...)
+	}
 	return true
 }
