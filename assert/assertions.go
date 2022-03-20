@@ -109,7 +109,6 @@ func NotNil(t *testing.T, object any, msgAndArgs ...interface{}) bool {
 }
 
 // Len asserts that the specified object has specific length.
-// Len also fails if the object has a type that len() not accept.
 //
 //    assert.Len(t, mySlice, 3)
 func Len[T any](t *testing.T, object []T, length int, msgAndArgs ...interface{}) bool {
