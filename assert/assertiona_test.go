@@ -1,6 +1,7 @@
 package assert_test
 
 import (
+	"errors"
 	"fmt"
 	"testing"
 
@@ -459,7 +460,68 @@ func TestNotSameComparesStructs(t *testing.T) {
 	}
 }
 
-	assert.Equal(mockT, expected, actual)
+func TestNil(t *testing.T) {
+	mockT := new(testing.T)
+
+	type testCase[T comparable] struct {
+		f      func() error
+		result bool
+		remark string
+	}
+
+	cases := []testCase[*struct{ field int }]{
+		{
+			f:      func() error { return errors.New("some error") },
+			result: false,
+		},
+		{
+			f:      func() error { return nil },
+			result: true,
+		},
+	}
+
+	for _, c := range cases {
+		t.Run(fmt.Sprintf("Equal(%#v, %#v)", nil, c.f()), func(t *testing.T) {
+			err := c.f()
+			res := assert.Nil(mockT, err)
+
+			if res != c.result {
+				t.Errorf("Equal(%#v, %#v) should return %#v: %s", nil, err, c.result, c.remark)
+			}
+		})
+	}
+}
+
+func TestNotNil(t *testing.T) {
+	mockT := new(testing.T)
+
+	type testCase[T comparable] struct {
+		f      func() error
+		result bool
+		remark string
+	}
+
+	cases := []testCase[*struct{ field int }]{
+		{
+			f:      func() error { return errors.New("some error") },
+			result: true,
+		},
+		{
+			f:      func() error { return nil },
+			result: false,
+		},
+	}
+
+	for _, c := range cases {
+		t.Run(fmt.Sprintf("Equal(%#v, %#v)", nil, c.f()), func(t *testing.T) {
+			err := c.f()
+			res := assert.NotNil(mockT, err)
+
+			if res != c.result {
+				t.Errorf("Equal(%#v, %#v) should return %#v: %s", nil, err, c.result, c.remark)
+			}
+		})
+	}
 }
 
 func pointer[T any](input T) *T {

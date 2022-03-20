@@ -79,3 +79,31 @@ func NotSame[T comparable](t *testing.T, expected, actual T, msgAndArgs ...inter
 	}
 	return true
 }
+
+// Nil asserts that the specified object is nil.
+//
+//    assert.Nil(t, err)
+func Nil(t *testing.T, err error, msgAndArgs ...interface{}) bool {
+	if err != nil {
+		return Fail(t, fmt.Sprintf("Not equal: \n"+
+			"expected no error\n"+
+			//TODO: support diff
+			//"actual  : %s%s", expected, actual, diff), msgAndArgs...)
+			"actual  : %v", err), msgAndArgs...)
+	}
+	return true
+}
+
+// NotNil asserts that the specified object is not nil.
+//
+//    assert.NotNil(t, err)
+func NotNil(t *testing.T, err error, msgAndArgs ...interface{}) bool {
+	if err == nil {
+		return Fail(t, fmt.Sprintf("Not equal: \n"+
+			"expected error\n"+
+			//TODO: support diff
+			//"actual  : %s%s", expected, actual, diff), msgAndArgs...)
+			"actual  : %v", err), msgAndArgs...)
+	}
+	return true
+}
