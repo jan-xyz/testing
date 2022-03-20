@@ -523,6 +523,44 @@ func TestNotNil(t *testing.T) {
 	}
 }
 
+func TestLen(t *testing.T) {
+	mockT := new(testing.T)
+
+	type testCase struct {
+		actual []int
+		len    int
+		result bool
+		remark string
+	}
+
+	cases := []testCase{
+		{
+			actual: []int{1, 2, 3},
+			len:    7,
+			result: false,
+		},
+		{
+			actual: []int{1, 2, 3},
+			len:    3,
+			result: true,
+		},
+		{
+			actual: nil,
+			result: true,
+		},
+	}
+
+	for _, c := range cases {
+		t.Run(fmt.Sprintf("Equal(%#v, %#v)", nil, c.actual), func(t *testing.T) {
+			res := assert.Len(mockT, c.actual, c.len)
+
+			if res != c.result {
+				t.Errorf("Equal(%#v, %#v) should return %#v: %s", nil, c.actual, c.result, c.remark)
+			}
+		})
+	}
+}
+
 func pointer[T any](input T) *T {
 	return &input
 }
