@@ -39,10 +39,6 @@ func TestEqualComparesSimpleTypes(t *testing.T) {
 			}
 		})
 	}
-	expected := 1
-	actual := 1
-
-	assert.Equal(mockT, expected, actual)
 }
 
 func TestEqualComparesPointer(t *testing.T) {
@@ -77,10 +73,6 @@ func TestEqualComparesPointer(t *testing.T) {
 			}
 		})
 	}
-	expected := 1
-	actual := 1
-
-	assert.Equal(mockT, expected, actual)
 }
 
 func TestEqualComparesStructs(t *testing.T) {
@@ -119,10 +111,6 @@ func TestEqualComparesStructs(t *testing.T) {
 			}
 		})
 	}
-	expected := 1
-	actual := 1
-
-	assert.Equal(mockT, expected, actual)
 }
 
 func TestNotEqualComparesSimpleTypes(t *testing.T) {
@@ -157,10 +145,6 @@ func TestNotEqualComparesSimpleTypes(t *testing.T) {
 			}
 		})
 	}
-	expected := 1
-	actual := 1
-
-	assert.Equal(mockT, expected, actual)
 }
 
 func TestNotEqualComparesPointer(t *testing.T) {
@@ -195,10 +179,6 @@ func TestNotEqualComparesPointer(t *testing.T) {
 			}
 		})
 	}
-	expected := 1
-	actual := 1
-
-	assert.Equal(mockT, expected, actual)
 }
 
 func TestNotEqualComparesStructs(t *testing.T) {
@@ -237,10 +217,6 @@ func TestNotEqualComparesStructs(t *testing.T) {
 			}
 		})
 	}
-	expected := 1
-	actual := 1
-
-	assert.Equal(mockT, expected, actual)
 }
 
 func TestSamComparesSimpleTypes(t *testing.T) {
@@ -275,10 +251,6 @@ func TestSamComparesSimpleTypes(t *testing.T) {
 			}
 		})
 	}
-	expected := 1
-	actual := 1
-
-	assert.Equal(mockT, expected, actual)
 }
 
 func TestSameComparesPointer(t *testing.T) {
@@ -320,10 +292,6 @@ func TestSameComparesPointer(t *testing.T) {
 			}
 		})
 	}
-	expected := 1
-	actual := 1
-
-	assert.Equal(mockT, expected, actual)
 }
 
 func TestSameComparesStructs(t *testing.T) {
@@ -369,10 +337,6 @@ func TestSameComparesStructs(t *testing.T) {
 			}
 		})
 	}
-	expected := 1
-	actual := 1
-
-	assert.Equal(mockT, expected, actual)
 }
 
 func TestNotSameComparesSimpleTypes(t *testing.T) {
@@ -407,10 +371,6 @@ func TestNotSameComparesSimpleTypes(t *testing.T) {
 			}
 		})
 	}
-	expected := 1
-	actual := 1
-
-	assert.Equal(mockT, expected, actual)
 }
 
 func TestNotSameComparesPointer(t *testing.T) {
@@ -452,10 +412,6 @@ func TestNotSameComparesPointer(t *testing.T) {
 			}
 		})
 	}
-	expected := 1
-	actual := 1
-
-	assert.Equal(mockT, expected, actual)
 }
 
 func TestNotSameComparesStructs(t *testing.T) {
@@ -501,8 +457,7 @@ func TestNotSameComparesStructs(t *testing.T) {
 			}
 		})
 	}
-	expected := 1
-	actual := 1
+}
 
 	assert.Equal(mockT, expected, actual)
 }
