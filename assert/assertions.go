@@ -12,7 +12,7 @@ import (
 //
 // Pointer variable equality is determined based on the equality of the
 // referenced values (as opposed to the memory addresses).
-func Equal[T comparable](t *testing.T, expected T, actual T, msgAndArgs ...any) bool {
+func Equal[T comparable](t *testing.T, expected, actual T, msgAndArgs ...any) bool {
 	if !reflect.DeepEqual(expected, actual) {
 		return Fail(t, fmt.Sprintf("Not equal: \n"+
 			"expected: %v\n"+
@@ -29,7 +29,7 @@ func Equal[T comparable](t *testing.T, expected T, actual T, msgAndArgs ...any) 
 //
 // Pointer variable equality is determined based on the equality of the
 // referenced values (as opposed to the memory addresses).
-func NotEqual[T comparable](t *testing.T, expected T, actual T, msgAndArgs ...any) bool {
+func NotEqual[T comparable](t *testing.T, expected, actual T, msgAndArgs ...any) bool {
 	if reflect.DeepEqual(expected, actual) {
 		return Fail(t, fmt.Sprintf("Not equal: \n"+
 			"expected: %v\n"+
@@ -52,7 +52,7 @@ func Fail(t *testing.T, failureMessage string, msgArgs ...any) bool {
 //
 // This is similar to [Equal], however, Pointer variable sameness is
 // determined based on the same memory addresses.
-func Same(t *testing.T, expected, actual interface{}, msgAndArgs ...interface{}) bool {
+func Same[T comparable](t *testing.T, expected, actual T, msgAndArgs ...interface{}) bool {
 	if expected != actual {
 		return Fail(t, fmt.Sprintf("Not equal: \n"+
 			"expected: %v\n"+
@@ -69,7 +69,7 @@ func Same(t *testing.T, expected, actual interface{}, msgAndArgs ...interface{})
 //
 // This is similar to [NotEqual], however, Pointer variable sameness is
 // determined based on the same memory addresses.
-func NotSame(t *testing.T, expected, actual interface{}, msgAndArgs ...interface{}) bool {
+func NotSame[T comparable](t *testing.T, expected, actual T, msgAndArgs ...interface{}) bool {
 	if expected == actual {
 		return Fail(t, fmt.Sprintf("Not equal: \n"+
 			"expected: %v\n"+
