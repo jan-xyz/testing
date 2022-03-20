@@ -561,6 +561,44 @@ func TestLen(t *testing.T) {
 	}
 }
 
+func TestLenMap(t *testing.T) {
+	mockT := new(testing.T)
+
+	type testCase struct {
+		actual map[string]int
+		len    int
+		result bool
+		remark string
+	}
+
+	cases := []testCase{
+		{
+			actual: map[string]int{"foo": 1, "bar": 2, "baz": 3},
+			len:    7,
+			result: false,
+		},
+		{
+			actual: map[string]int{"foo": 1, "bar": 2, "baz": 3},
+			len:    3,
+			result: true,
+		},
+		{
+			actual: nil,
+			result: true,
+		},
+	}
+
+	for _, c := range cases {
+		t.Run(fmt.Sprintf("Equal(%#v, %#v)", nil, c.actual), func(t *testing.T) {
+			res := assert.LenMap(mockT, c.actual, c.len)
+
+			if res != c.result {
+				t.Errorf("Equal(%#v, %#v) should return %#v: %s", nil, c.actual, c.result, c.remark)
+			}
+		})
+	}
+}
+
 func pointer[T any](input T) *T {
 	return &input
 }

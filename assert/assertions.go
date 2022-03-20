@@ -108,10 +108,22 @@ func NotNil(t *testing.T, object any, msgAndArgs ...interface{}) bool {
 	return true
 }
 
-// Len asserts that the specified object has specific length.
+// Len asserts that the specified slice has specific length.
 //
 //    assert.Len(t, mySlice, 3)
 func Len[T any](t *testing.T, object []T, length int, msgAndArgs ...interface{}) bool {
+	l := len(object)
+	if l != length {
+		return Fail(t, fmt.Sprintf("\"%v\" should have %d item(s), but has %d", object, length, l), msgAndArgs...)
+	}
+
+	return true
+}
+
+// LenMap asserts that the specified map has specific length.
+//
+//    assert.LenMap(t, mySlice, 3)
+func LenMap[T comparable, U any](t *testing.T, object map[T]U, length int, msgAndArgs ...interface{}) bool {
 	l := len(object)
 	if l != length {
 		return Fail(t, fmt.Sprintf("\"%v\" should have %d item(s), but has %d", object, length, l), msgAndArgs...)
