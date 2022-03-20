@@ -6,6 +6,12 @@ import (
 	"testing"
 )
 
+// Fail reports a failure through
+func Fail(t *testing.T, failureMessage string, msgArgs ...any) bool {
+	t.Errorf(failureMessage, msgArgs...)
+	return false
+}
+
 // Equal asserts that two objects are equal.
 //
 //    assert.Equal(t, 123, 123)
@@ -38,12 +44,6 @@ func NotEqual[T comparable](t *testing.T, expected, actual T, msgAndArgs ...any)
 			"actual  : %v", expected, actual), msgAndArgs...)
 	}
 	return true
-}
-
-// Fail reports a failure through
-func Fail(t *testing.T, failureMessage string, msgArgs ...any) bool {
-	t.Errorf(failureMessage, msgArgs...)
-	return false
 }
 
 // Same asserts that two pointers reference the same object.
